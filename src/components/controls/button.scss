@@ -1,0 +1,30 @@
+.btn-container {
+  transition: .2s;
+  border: 2px solid #00bc8c;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  max-width: 50px;
+  width: 100%;
+  margin-top: -10px;
+}
+
+.btn-play {
+  margin-left: 6px;
+  border-style: solid;
+  border-width: 12px 0 12px 18px;
+  border-color: transparent transparent transparent rgb(0, 188, 140);
+  cursor: pointer;
+}
+
+.btn-stop {
+  height: 25px;
+  width: 15px;
+  border-left: 5px solid rgb(0, 188, 140);
+  border-right: 5px solid rgb(0, 188, 140);
+  cursor: pointer;
+}

@@ -1,0 +1,55 @@
+.description {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 0 16px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  width: 80%;
+  background-color: #303030;
+  font-size: 15px;
+
+  @media (max-width: 680px) {
+    width: 100%;
+  }
+
+  .bird-info {
+    display: flex;
+    padding: 0;
+    min-height: 173px;
+
+    @media (max-width: 788px) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image {
+      width: 40%;
+      height: 155px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-right: 32px;
+
+      @media (max-width: 788px) {
+        margin-right: 0;
+        width: 200px;
+      }
+    }
+
+    .name-species-audio {
+      width: 100%;
+
+      .name {
+        margin: 0;
+        padding: 4px 0 10px 0;
+        font-size: 22px;
+        border-bottom: 1px solid #555;
+      }
+
+      .species {
+        margin: 0 0 20px 0;
+        padding: 4px 0 4px 0;
+        border-bottom: 1px solid #555;
+      }
+    }
+  }
+}
