@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 import Header from "./components/header";
 import Homepage from "./pages/homepage";
@@ -23,6 +24,15 @@ const App = () => {
     check()
       .then((data) => {
         dispatch(setCurrentUser(data));
+      })
+      .catch((e) => {
+        toast.warning(
+          e.response.data.message + ". Чтобы играть необходимо авторизоваться",
+          {
+            className: "toast-error",
+            position: toast.POSITION.BOTTOM_CENTER,
+          }
+        );
       })
       .finally(() => setLoading(false));
   }, [dispatch]);

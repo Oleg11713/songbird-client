@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Spinner } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
 
 import CurrentQuestion from "../../components/currentQuestion";
 import AnswerArea from "../../components/answerArea";
@@ -8,7 +10,6 @@ import { selectLevel } from "../../redux/progress/selectors";
 import { selectBirds } from "../../redux/birds/selectors";
 import { fetchBirds } from "../../http/birdAPI";
 import { setBirds, setSelectedBird } from "../../redux/birds/actions";
-import { Spinner } from "react-bootstrap";
 
 const Homepage = () => {
   const NUMBER_OF_BIRDS_PER_LEVEL = 6;
@@ -53,6 +54,9 @@ const Homepage = () => {
       />
       <AnswerArea birds={birdsPerLevel} currentBird={currentBird} />
       <ButtonNext />
+      <>
+        <ToastContainer />
+      </>
     </div>
   );
 };
