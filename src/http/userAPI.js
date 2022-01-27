@@ -1,4 +1,4 @@
-import { $host, $authHost } from "./index";
+import { $authHost, $host } from "./index";
 import jwt_decode from "jwt-decode";
 
 export const registration = async (
@@ -11,15 +11,18 @@ export const registration = async (
     displayName,
     email,
     password,
-      totalScoreForAllGames,
+    totalScoreForAllGames,
   });
   localStorage.setItem("token", data.token);
   return jwt_decode(data.token);
 };
 
 export const updateTotalScore = async (totalScoreForAllGames, email) => {
-    const { data } = await $host.patch("api", { totalScoreForAllGames, email });
-    return data;
+  const { data } = await $host.patch("api/game", {
+    totalScoreForAllGames,
+    email,
+  });
+  return data;
 };
 
 export const login = async (email, password) => {
@@ -32,4 +35,9 @@ export const check = async () => {
   const { data } = await $authHost.get("api/signIn/auth");
   localStorage.setItem("token", data.token);
   return jwt_decode(data.token);
+};
+
+export const resetToken = async () => {
+  localStorage.setItem("token", "");
+  return jwt_decode("");
 };

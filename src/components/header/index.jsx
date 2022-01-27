@@ -8,6 +8,7 @@ import { selectCurrentUser } from "../../redux/user/selectors";
 
 import "./styles.scss";
 import { setCurrentUser } from "../../redux/user/actions";
+import { resetToken } from "../../http/userAPI";
 
 const Header = () => {
   const questionTopics = [
@@ -54,7 +55,9 @@ const Header = () => {
             onClick={() => {
               history.push("/");
               history.go(0);
-              dispatch(setCurrentUser(null));
+              resetToken().then((data) => {
+                dispatch(setCurrentUser(data));
+              });
             }}
           >
             Sign Out
