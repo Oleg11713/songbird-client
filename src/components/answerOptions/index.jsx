@@ -30,6 +30,39 @@ const AnswerOptions = ({ birds, currentBird }) => {
   const scoreOnTheLevel = useSelector(selectScoreOnTheLevel);
   const currentUser = useSelector(selectCurrentUser);
 
+  const handleClick = (bird) => {
+    if (currentUser) {
+      dispatch(setSelectedBird(bird));
+      const click = document.querySelector(`#${bird.name}`);
+      if (!isLevelCompleted) {
+        if (bird.name === currentBird.name) {
+          click.classList.add("won");
+          const sound = new Audio(wonSound);
+          sound.volume = SOUND_VOLUME;
+          sound.play();
+          dispatch(setIsCorrectCurrentBird(true));
+          dispatch(setIsLevelCompleted(true));
+          dispatch(setTotalScore(scoreOnTheLevel));
+          currentUser.totalScoreForAllGames += scoreOnTheLevel;
+          updateTotalScore(
+            currentUser.totalScoreForAllGames,
+            currentUser.email
+          );
+          dispatch(setScoreOnTheLevel(MAX_SCORE_ON_THE_LEVEL));
+        } else {
+          click.classList.remove("won");
+          if (!click.classList.contains("lost")) {
+            const sound = new Audio(lostSound);
+            sound.volume = SOUND_VOLUME;
+            sound.play();
+            dispatch(setScoreOnTheLevel(scoreOnTheLevel - 1));
+          }
+          click.classList.add("lost");
+        }
+      }
+    }
+  };
+
   return (
     <div className="answer-options">
       <ul className="answers-group">
@@ -38,36 +71,7 @@ const AnswerOptions = ({ birds, currentBird }) => {
             key={bird.name}
             className="answers-item"
             onClick={() => {
-              if (currentUser) {
-                dispatch(setSelectedBird(bird));
-                const click = document.querySelector(`#${bird.name}`);
-                if (!isLevelCompleted) {
-                  if (bird.name === currentBird.name) {
-                    click.classList.add("won");
-                    const sound = new Audio(wonSound);
-                    sound.volume = SOUND_VOLUME;
-                    sound.play();
-                    dispatch(setIsCorrectCurrentBird(true));
-                    dispatch(setIsLevelCompleted(true));
-                    dispatch(setTotalScore(scoreOnTheLevel));
-                    currentUser.totalScoreForAllGames += scoreOnTheLevel;
-                    updateTotalScore(
-                      currentUser.totalScoreForAllGames,
-                      currentUser.email
-                    );
-                    dispatch(setScoreOnTheLevel(MAX_SCORE_ON_THE_LEVEL));
-                  } else {
-                    click.classList.remove("won");
-                    if (!click.classList.contains("lost")) {
-                      const sound = new Audio(lostSound);
-                      sound.volume = SOUND_VOLUME;
-                      sound.play();
-                      dispatch(setScoreOnTheLevel(scoreOnTheLevel - 1));
-                    }
-                    click.classList.add("lost");
-                  }
-                }
-              }
+              handleClick(bird);
             }}
           >
             <span id={bird.name} className={`circle`} />
