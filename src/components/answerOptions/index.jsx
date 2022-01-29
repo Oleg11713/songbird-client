@@ -1,26 +1,25 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import lostSound from "../../sounds/lost.mp3";
-import wonSound from "../../sounds/won.mp3";
 import {
   selectIsLevelCompleted,
   selectScoreOnTheLevel,
 } from "../../redux/progress/selectors";
 import {
-  setIsCorrectCurrentBird,
-  setSelectedBird,
-} from "../../redux/birds/actions";
-import {
   setIsLevelCompleted,
   setScoreOnTheLevel,
   setTotalScore,
 } from "../../redux/progress/actions";
+import {
+  setIsCorrectCurrentBird,
+  setSelectedBird,
+} from "../../redux/birds/actions";
 import { selectCurrentUser } from "../../redux/user/selectors";
+import { updateTotalScore } from "../../http/userAPI";
 
+import lostSound from "../../sounds/lost.mp3";
+import wonSound from "../../sounds/won.mp3";
 import "./styles.scss";
-import { check, updateTotalScore } from "../../http/userAPI";
-import { toast } from "react-toastify";
 
 const AnswerOptions = ({ birds, currentBird }) => {
   const SOUND_VOLUME = 0.1;
@@ -31,13 +30,6 @@ const AnswerOptions = ({ birds, currentBird }) => {
   const scoreOnTheLevel = useSelector(selectScoreOnTheLevel);
   const currentUser = useSelector(selectCurrentUser);
 
-  const update = async () => {
-    await updateTotalScore(
-      currentUser.totalScoreForAllGames,
-      currentUser.email
-    );
-  };
-
   return (
     <div className="answer-options">
       <ul className="answers-group">
@@ -46,40 +38,36 @@ const AnswerOptions = ({ birds, currentBird }) => {
             key={bird.name}
             className="answers-item"
             onClick={() => {
-              check()
-                .then(() => {
-                  dispatch(setSelectedBird(bird));
-                  const click = document.querySelector(`#${bird.name}`);
-                  if (!isLevelCompleted) {
-                    if (bird.name === currentBird.name) {
-                      click.classList.add("won");
-                      const sound = new Audio(wonSound);
+              if (currentUser) {
+                dispatch(setSelectedBird(bird));
+                const click = document.querySelector(`#${bird.name}`);
+                if (!isLevelCompleted) {
+                  if (bird.name === currentBird.name) {
+                    click.classList.add("won");
+                    const sound = new Audio(wonSound);
+                    sound.volume = SOUND_VOLUME;
+                    sound.play();
+                    dispatch(setIsCorrectCurrentBird(true));
+                    dispatch(setIsLevelCompleted(true));
+                    dispatch(setTotalScore(scoreOnTheLevel));
+                    currentUser.totalScoreForAllGames += scoreOnTheLevel;
+                    updateTotalScore(
+                      currentUser.totalScoreForAllGames,
+                      currentUser.email
+                    );
+                    dispatch(setScoreOnTheLevel(MAX_SCORE_ON_THE_LEVEL));
+                  } else {
+                    click.classList.remove("won");
+                    if (!click.classList.contains("lost")) {
+                      const sound = new Audio(lostSound);
                       sound.volume = SOUND_VOLUME;
                       sound.play();
-                      dispatch(setIsCorrectCurrentBird(true));
-                      dispatch(setIsLevelCompleted(true));
-                      dispatch(setTotalScore(scoreOnTheLevel));
-                      currentUser.totalScoreForAllGames += scoreOnTheLevel;
-                      update();
-                      dispatch(setScoreOnTheLevel(MAX_SCORE_ON_THE_LEVEL));
-                    } else {
-                      click.classList.remove("won");
-                      if (!click.classList.contains("lost")) {
-                        const sound = new Audio(lostSound);
-                        sound.volume = SOUND_VOLUME;
-                        sound.play();
-                        dispatch(setScoreOnTheLevel(scoreOnTheLevel - 1));
-                      }
-                      click.classList.add("lost");
+                      dispatch(setScoreOnTheLevel(scoreOnTheLevel - 1));
                     }
+                    click.classList.add("lost");
                   }
-                })
-                .catch(() => {
-                  toast.error("Чтобы играть необходимо авторизоваться", {
-                    className: "toast-error",
-                    position: toast.POSITION.BOTTOM_CENTER,
-                  });
-                });
+                }
+              }
             }}
           >
             <span id={bird.name} className={`circle`} />

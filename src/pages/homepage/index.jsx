@@ -8,8 +8,8 @@ import AnswerArea from "../../components/answerArea";
 import ButtonNext from "../../components/buttonNext";
 import { selectLevel } from "../../redux/progress/selectors";
 import { selectBirds } from "../../redux/birds/selectors";
-import { fetchBirds } from "../../http/birdAPI";
 import { setBirds, setSelectedBird } from "../../redux/birds/actions";
+import { fetchBirds } from "../../http/birdAPI";
 
 const Homepage = () => {
   const NUMBER_OF_BIRDS_PER_LEVEL = 6;

@@ -1,5 +1,6 @@
-import { $authHost, $host } from "./index";
 import jwt_decode from "jwt-decode";
+
+import { authHost, host } from "./index";
 
 export const registration = async (
   displayName,
@@ -7,7 +8,7 @@ export const registration = async (
   password,
   totalScoreForAllGames
 ) => {
-  const { data } = await $host.post("api/signIn/registration", {
+  const { data } = await host.post("api/user/registration", {
     displayName,
     email,
     password,
@@ -18,7 +19,7 @@ export const registration = async (
 };
 
 export const updateTotalScore = async (totalScoreForAllGames, email) => {
-  const { data } = await $host.patch("api/game", {
+  const { data } = await authHost.patch("api/user/updateScore", {
     totalScoreForAllGames,
     email,
   });
@@ -26,13 +27,13 @@ export const updateTotalScore = async (totalScoreForAllGames, email) => {
 };
 
 export const login = async (email, password) => {
-  const { data } = await $host.post("api/signIn/login", { email, password });
+  const { data } = await host.post("api/user/login", { email, password });
   localStorage.setItem("token", data.token);
   return jwt_decode(data.token);
 };
 
-export const check = async () => {
-  const { data } = await $authHost.get("api/signIn/auth");
+export const authCheck = async () => {
+  const { data } = await authHost.get("api/user/auth");
   localStorage.setItem("token", data.token);
   return jwt_decode(data.token);
 };

@@ -1,11 +1,6 @@
-import { $authHost, $host } from "./index";
-
-export const createBird = async (bird) => {
-  const { data } = await $authHost.post("api/game/addBird", bird);
-  return data;
-};
+import { host } from "./index";
 
 export const fetchBirds = async () => {
-  const { data } = await $host.get("api/game/viewBirds");
+  const { data } = await host.get("api/bird/viewBirds");
   return data;
 };

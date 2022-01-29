@@ -2,13 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
-import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectLevel, selectTotalScore } from "../../redux/progress/selectors";
 import { selectCurrentUser } from "../../redux/user/selectors";
-
-import "./styles.scss";
 import { setCurrentUser } from "../../redux/user/actions";
 import { resetToken } from "../../http/userAPI";
+
+import { ReactComponent as Logo } from "../../assets/logo.svg";
+import "./styles.scss";
 
 const Header = () => {
   const questionTopics = [

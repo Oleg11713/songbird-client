@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-import Header from "./components/header";
 import Homepage from "./pages/homepage";
 import EndGamePage from "./pages/endGamePage";
 import SignInAndSignUpPage from "./pages/signInAndSignUp";
-import { selectCurrentUser } from "./redux/user/selectors";
 import ProfilePage from "./pages/userProfile";
+import Header from "./components/header";
+import { selectCurrentUser } from "./redux/user/selectors";
 import { setCurrentUser } from "./redux/user/actions";
-import { check } from "./http/userAPI";
+import { authCheck } from "./http/userAPI";
 
 import "./App.css";
 
@@ -21,7 +21,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    check()
+    authCheck()
       .then((data) => {
         dispatch(setCurrentUser(data));
       })

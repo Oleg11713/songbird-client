@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import startBirdImage from "../../assets/startBird.jpg";
 import AudioPlayer from "../audio";
 import {
   selectIsCorrectCurrentBird,
   selectSelectedBird,
 } from "../../redux/birds/selectors";
 
+import startBirdImage from "../../assets/startBird.jpg";
 import "./styles.scss";
 
 const CurrentQuestion = ({ image, name, audio }) => {

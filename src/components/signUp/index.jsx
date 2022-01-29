@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { TextField } from "@material-ui/core";
 import { NavLink, useHistory } from "react-router-dom";
+import { TextField } from "@material-ui/core";
 
 import CustomButton from "../customButton";
 import { registration } from "../../http/userAPI";
