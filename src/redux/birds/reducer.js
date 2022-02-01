@@ -1,5 +1,5 @@
-import { actionTypes } from "./types";
-import { fetchBirds } from "../../http/birdAPI";
+import { actionTypes } from './types';
+import { fetchBirds } from '../../http/birdAPI';
 
 export const INITIAL_STATE = {
   birds: null,
@@ -7,7 +7,7 @@ export const INITIAL_STATE = {
   isCorrectCurrentBird: false,
 };
 
-fetchBirds().then((data) => {
+fetchBirds().then(data => {
   INITIAL_STATE.birds = data;
 });
 

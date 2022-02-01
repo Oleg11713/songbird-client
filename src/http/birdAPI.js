@@ -1,6 +1,6 @@
-import { host } from "./index";
+import { host } from './index';
 
 export const fetchBirds = async () => {
-  const { data } = await host.get("api/bird/viewBirds");
+  const { data } = await host.get('api/bird/viewBirds');
   return data;
 };

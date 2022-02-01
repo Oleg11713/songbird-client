@@ -1,4 +1,4 @@
-import { actionTypes } from "./types";
+import { actionTypes } from './types';
 
 const START_LEVEL = 1;
 const START_TOTAL_SCORE = 0;
