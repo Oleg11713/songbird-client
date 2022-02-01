@@ -3,10 +3,10 @@ import { useState, useRef, useEffect } from "react";
 import "./slider.scss";
 import "./thumb.scss";
 
-const Slider = ({ percentage = 0, onChange }) => {
-  const PERCENTAGE = 100;
-  const PIXELS_IN_PERCENTAGE = 7.5;
+const PERCENTAGE = 100;
+const PIXELS_IN_PERCENTAGE = 7.5;
 
+const Slider = ({ percentage = 0, onChange }) => {
   const [position, setPosition] = useState(0);
   const [marginLeft, setMarginLeft] = useState(0);
   const [progressBarWidth, setProgressBarWidth] = useState(0);

@@ -15,9 +15,9 @@ import {
 
 import "./styles.scss";
 
-const ButtonNext = () => {
-  const START_LEVEL = 1;
+const START_LEVEL = 1;
 
+const ButtonNext = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   let level = useSelector(selectLevel);

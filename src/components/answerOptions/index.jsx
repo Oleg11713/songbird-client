@@ -21,10 +21,10 @@ import lostSound from "../../sounds/lost.mp3";
 import wonSound from "../../sounds/won.mp3";
 import "./styles.scss";
 
-const AnswerOptions = ({ birds, currentBird }) => {
-  const SOUND_VOLUME = 0.1;
-  const MAX_SCORE_ON_THE_LEVEL = 5;
+const SOUND_VOLUME = 0.1;
+const MAX_SCORE_ON_THE_LEVEL = 5;
 
+const AnswerOptions = ({ birds, currentBird }) => {
   const dispatch = useDispatch();
   const isLevelCompleted = useSelector(selectIsLevelCompleted);
   const scoreOnTheLevel = useSelector(selectScoreOnTheLevel);

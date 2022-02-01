@@ -11,9 +11,9 @@ import { registration } from "../../http/userAPI";
 import "./styles.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-const SignUp = () => {
-  const INITIAL_TOTAL_SCORE = 0;
+const INITIAL_TOTAL_SCORE = 0;
 
+const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 

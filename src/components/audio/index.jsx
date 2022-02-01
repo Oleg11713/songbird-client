@@ -6,10 +6,10 @@ import Button from "../controls/Button";
 
 import "./styles.scss";
 
-const AudioPlayer = ({ audio }) => {
-  const PERCENTAGE = 100;
-  const AUDIO_VOLUME = 0.4;
+const PERCENTAGE = 100;
+const AUDIO_VOLUME = 0.4;
 
+const AudioPlayer = ({ audio }) => {
   const [percentage, setPercentage] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);

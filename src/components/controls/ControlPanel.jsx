@@ -2,11 +2,11 @@ import React from "react";
 
 import "./control-panel.scss";
 
-const ControlPanel = ({ duration, currentTime }) => {
-  const HOUR_IN_SECONDS = 3600;
-  const MINUTE_IN_SECONDS = 60;
-  const TEN = 10;
+const HOUR_IN_SECONDS = 3600;
+const MINUTE_IN_SECONDS = 60;
+const TEN = 10;
 
+const ControlPanel = ({ duration, currentTime }) => {
   function secondsToHms(seconds) {
     if (!seconds) return "00:00";
 

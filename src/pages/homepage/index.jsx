@@ -11,9 +11,9 @@ import { selectBirds } from "../../redux/birds/selectors";
 import { setBirds, setSelectedBird } from "../../redux/birds/actions";
 import { fetchBirds } from "../../http/birdAPI";
 
-const Homepage = () => {
-  const NUMBER_OF_BIRDS_PER_LEVEL = 6;
+const NUMBER_OF_BIRDS_PER_LEVEL = 6;
 
+const Homepage = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const level = useSelector(selectLevel) - 1;
